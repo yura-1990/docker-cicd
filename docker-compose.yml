@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./:/var/www/
+      - ./nginx/conf.d/:/etc/nginx/conf.d #simlink from first line of the code to the second code
+    ports:
+      - "8876:80"
+    depends_on:
+      - php
+    container_name: app_nginx
+  php:
+    image: php:8.1-fpm
+    volumes:
+      - ./:/var/www
